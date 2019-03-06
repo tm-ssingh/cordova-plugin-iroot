@@ -227,9 +227,8 @@ public class IRoot extends CordovaPlugin {
     private PluginResult checkIsRooted(final JSONArray args, final CallbackContext callbackContext) {
         try {
             RootBeer rootBeer = new RootBeer(this.cordova.getActivity().getApplicationContext());
-
-            boolean check = isDeviceRooted() || ((this.WITH) ? rootBeer.isRootedWithoutBusyBoxCheck() : rootBeer.isRooted());
-
+            //Sukhwinder: ignored the check for BusyBox since we need to check root device check only
+            boolean check = isDeviceRooted() || rootBeer.isRootedWithoutBusyBoxCheck();//((this.WITH) ? rootBeer.isRootedWithoutBusyBoxCheck() : rootBeer.isRooted());
             return new PluginResult(Status.OK, check);
         } catch (Exception e) {
             return this.error("Error", e);
